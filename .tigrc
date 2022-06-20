@@ -1,0 +1,76 @@
+# Find more useful bindings at: https://github.com/jonas/tig/wiki/Bindings
+#
+# You might also want to read the tig manual:
+# http://jonas.nitro.dk/tig/manual.html
+#
+# Note that there's also a system-wide tigrc sitting at: /usr/local/etc/tigrc
+#
+# -
+# Built-in shortcuts:
+# + toggle which files to show when viewing the diff for a single file: "%"
+# + delete branches from refs view: just press "!" on the branch line
+# + delete stash while in stash view: just press "!" on the stash line
+
+# -
+# copy current commit's id to the clipboard (OSX) by pressing:
+# 7 (for the full id)
+bind generic 7 !@sh -c "printf %(commit) | pbcopy"
+# 8 (for the short commit id)
+bind generic 8 !@sh -c "printf '%.8s' %(commit) | pbcopy"
+# copy current commit's id to the clipboard (non OSX)
+# bind generic 7 !@sh -c "echo -n %(commit) | xclip -selection c"
+
+# -
+# less-like page scrolling (ctrl-f / ctrl-b)
+bind generic <Ctrl-f> move-page-down
+bind generic <Ctrl-b> move-page-up
+# bind generic <Ctrl-d> move-half-page-down
+# bind generic <Ctrl-u> move-half-page-up
+
+
+# -
+# set what to show in the main view
+# (main view: `tig` -> it shows the commits of the current branch)
+set main-view = \
+      line-number:no,interval=1 \
+      id:yes \
+      date:no \
+      author:email-user,width:14 \
+      commit-title:yes,graph,refs,overflow=no
+
+
+# -
+# set what to show in the refs view
+# (refs view: `tig refs` -> it shows all branches)
+# (date-display changes with shortcut "D")
+set refs-view = \
+      line-number:no \
+      id:no \
+      date:relative \
+      author:email-user,width:14 \
+      ref \
+      commit-title
+
+
+# -
+# wrap around to top/bottom of view when searching
+set wrap-search = yes
+
+# -
+# make search case insensitive when all lowercase - case sensitive otherwise
+set ignore-case = smart-case
+
+# -
+# enable mouse support
+set mouse = yes
+# -
+# number of lines to scroll via the mouse
+set mouse-scroll = 3
+
+# -
+# Auto-refresh:
+set refresh-mode = periodic   # Enum: manual, auto, after-command, periodic
+set refresh-interval = 3      # Interval in seconds between refreshes
+
+color cursor            white   red bold
+
